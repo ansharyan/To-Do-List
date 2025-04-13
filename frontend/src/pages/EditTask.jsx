@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import {format} from "date-fns"
 
 export default function EditTask() {
     const { id } = useParams();
@@ -106,7 +107,7 @@ export default function EditTask() {
         <input
             type="date"
             name="dueDate"
-            value={formData.dueDate || ""}
+            value={(formData.dueDate.split("T")[0])|| ""}
             onChange={handleFormdata}
             className="input w-full"
         />
@@ -115,15 +116,15 @@ export default function EditTask() {
         <p className='text-lg'>Choose Category:</p>
         <span className='flex gap-2 text-md'>
             <input type='radio' name='category' id='Work' value='Work' onChange={handleFormdata} checked={formData.category === 'Work'} /> 
-            <label for='Work'>Work</label>
+            <label htmlFor='Work'>Work</label>
         </span>
         <span className='flex gap-2 text-md'>        
             <input type='radio' name='category' id='Personal' value='Personal' onChange={handleFormdata} checked={formData.category === 'Personal'} /> 
-            <label for='Personal'>Personal</label>
+            <label htmlFor='Personal'>Personal</label>
         </span>
         <span className='flex gap-2 text-md'>
             <input type='radio' name='category' id='Study' value='Study' onChange={handleFormdata} checked={formData.category === 'Study'} />
-            <label for='Study'>Study</label>
+            <label htmlFor='Study'>Study</label>
         </span>
         </div>
         <button onClick={handleSubmit} className='btn btn-primary text-amber-50'>{isEditing? "Editing": "Edit task"}</button>

@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react'
 import { MdEdit } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import {format} from "date-fns";
+
 export default function Task({task}) {
 
   const queryClient = useQueryClient();
@@ -67,7 +69,7 @@ export default function Task({task}) {
         <p className='text-gray-500'>{task?.description}</p>
         <div className='btn w-fit px-6 h-fit py-1 mt-2'>{task?.category}</div>
         <div className='flex justify-between items-center'>
-        <p>Due Date: {task?.dueDate}</p>
+        <p>Due Date: {format(new Date(task.dueDate), 'MMM d, yyyy')}</p>
         <div className={`btn ${task.isCompleted ? "bg-green-200" : "bg-red-200"}`} onClick={handleComplete}>{task.isCompleted? "Completed" :"Incomplete"}</div>
         </div>
         <div className='btn btn-error h-fit py-1 w-fit' onClick={handleDelete}>{isDeleting? "Deleting" : "Delete"}</div>
